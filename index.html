@@ -301,6 +301,137 @@
       </div>
     </div>
   </section>
+    
+    <section id="monetization" style="padding: 100px 0; border-bottom: 1px solid var(--border);">
+    <p class="section-label reveal">Upvoria for Enterprise</p>
+    <h2 class="section-title reveal">Monetisasi Data &<br>Solusi Transformasi B2B</h2>
+    
+    <div class="b2b-layout">
+      <div class="b2b-info reveal">
+        <div class="b2b-card">
+          <div class="b2b-icon">🔌</div>
+          <div class="b2b-meta">
+            <h3>Upvoria Disruption API</h3>
+            <p>Integrasikan seluruh variabel data kalkulasi prediksi risiko otomatisasi kami secara otomatis dan real-time langsung ke dalam sistem HRIS korporat atau platform rekrutmen Anda.</p>
+            <span class="b2b-tag">B2B Data Licensing</span>
+          </div>
+        </div>
+
+        <div class="b2b-card">
+          <div class="b2b-icon">📊</div>
+          <div class="b2b-meta">
+            <h3>Corporate War-Gaming Simulator</h3>
+            <p>Simulasi interaktif tingkat lanjut menggunakan parameter custom makro untuk memetakan dampak AI terhadap restrukturisasi divisi tenaga kerja dan efisiensi biaya operasional perusahaan.</p>
+            <span class="b2b-tag">Strategic Consulting</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="b2b-visual reveal reveal-delay-2">
+        <div class="code-window">
+          <div class="code-header">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="code-title">endpoint: /api/v1/predict?industry=finance</span>
+          </div>
+          <pre class="code-body"><code><span class="c-key">GET</span> https://api.upvoria.com/v1/predict
+
+<span class="c-comment">// Response Data Mentah (Format JSON)</span>
+{
+  <span class="c-attr">"status"</span>: <span class="c-string">"success"</span>,
+  <span class="c-attr">"industry"</span>: <span class="c-string">"Keuangan & Perbankan"</span>,
+  <span class="c-attr">"automation_risk"</span>: <span class="c-num">68</span>,
+  <span class="c-attr">"critical_sectors"</span>: [
+    <span class="c-string">"Credit Scoring"</span>, 
+    <span class="c-string">"Data Entry & Accounting"</span>
+  ],
+  <span class="c-attr">"required_tools"</span>: [<span class="c-string">"Python"</span>, <span class="c-string">"Power BI"</span>],
+  <span class="c-api">"api_license"</span>: <span class="c-string">"ACTIVE_ENTERPRISE"</span>
+}</code></pre>
+        </div>
+        <div class="b2b-cta-box">
+          <p>Butuh akses otomatisasi data masif untuk platform Anda?</p>
+          <button class="btn-primary" id="openSignupBtn"><span>Sign Up for API Access</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="signupModal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" id="closeSignupBtn">&times;</button>
+      <div class="modal-header">
+        <h3>Create Enterprise Account</h3>
+        <p>Mulai integrasikan Big Data Upvoria ke infrastruktur digital platform Anda.</p>
+      </div>
+      <form class="modal-form" onsubmit="event.preventDefault(); alert('Registrasi Prototipe Berhasil! Mengalihkan ke Dashboard Premium...'); window.location.href='dashboard.html';">
+        <div class="form-group">
+          <label>Nama Perusahaan / Organisasi</label>
+          <input type="text" placeholder="PT. Inovasi Teknologi" required>
+        </div>
+        <div class="form-group">
+          <label>Email Bisnis</label>
+          <input type="email" placeholder="name@company.com" required>
+        </div>
+        <div class="form-group">
+          <label>Pilih Kebutuhan Layanan</label>
+          <select required>
+            <option value="api">Upvoria Disruption API Access</option>
+            <option value="simulator">Corporate War-Gaming Simulator</option>
+            <option value="both">Keduanya (Full Enterprise Suite)</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-primary" style="width: 100%; margin-top: 12px;">
+          <span>Request API Key →</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div id="signupModal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" id="closeSignupBtn">&times;</button>
+      <div class="modal-header">
+        <h3>Create Enterprise Account</h3>
+        <p>Mulai integrasikan Big Data Upvoria ke infrastruktur digital platform Anda.</p>
+      </div>
+      <form class="modal-form" onsubmit="event.preventDefault(); alert('Registrasi Prototipe Berhasil!');">
+        <div class="form-group">
+          <label>Nama Perusahaan / Organisasi</label>
+          <input type="text" placeholder="PT. Inovasi Teknologi" required>
+        </div>
+        <div class="form-group">
+          <label>Email Bisnis</label>
+          <input type="email" placeholder="name@company.com" required>
+        </div>
+
+    <div class="b2b-layout">
+      <div class="b2b-info reveal">
+        <div class="b2b-card">
+          <div class="b2b-icon">🔌</div>
+          <div class="b2b-meta">
+            <h3>Upvoria Disruption API</h3>
+            <p>Integrasikan seluruh variabel data kalkulasi prediksi risiko otomatisasi kami secara otomatis dan real-time langsung ke dalam sistem HRIS korporat atau platform rekrutmen Anda.</p>
+            <span class="b2b-tag">B2B Data Licensing</span>
+          </div>
+        </div>
+
+        <div class="b2b-card">
+          <div class="b2b-icon">📊</div>
+          <div class="b2b-meta">
+            <h3>Corporate War-Gaming Simulator</h3>
+            <p>Simulasi interaktif tingkat lanjut menggunakan parameter custom makro untuk memetakan dampak AI terhadap restrukturisasi divisi tenaga kerja dan efisiensi biaya operasional perusahaan.</p>
+            <span class="b2b-tag">Strategic Consulting</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="b2b-visual reveal reveal-delay-2">
+        <div class="code-window">
+          <div class="code-header">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="code-title">endpoint: /api/v1/predict?industry=finance</span>
+          </div>
+          <pre class="code-body"><code><span class="c-key">GET</span> https://api.upvoria.com/v1/predict
 
   <!-- CTA -->
   <section id="cta">
