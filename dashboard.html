@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upvoria Enterprise — Developer & Analytics Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── VARIABLES & ROOT STYLING (SENADA DENGAN UPVORIA) ─── */
+    :root {
+      --bg: #06080f;
+      --surface: #0d1120;
+      --surface2: #131828;
+      --surface3: #1a2035;
+      --accent: #e8ff4d;   /* Acid Yellow */
+      --accent2: #4dffcb;  /* Mint Green */
+      --danger: #ff4d6d;
+      --warn: #ffaa4d;
+      --safe: #4dff9b;
+      --text: #e8ecf5;
+      --muted: #7a8299;
+      --border: rgba(255,255,255,0.07);
+    }
+
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+    
+    html { 
+      scroll-behavior: smooth; 
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      padding-bottom: 60px;
+    }
+
+    /* ─── CUSTOM CURSOR NEON ─── */
+    .cursor {
+      width: 12px; height: 12px;
+      background: var(--accent);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1px solid var(--accent2);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      opacity: 0.5;
+    }
+
+    /* CURSOR AKTIF DI LAYAR BESAR */
+    @media (min-width: 901px) {
+      body { cursor: none; }
+    }
+
+    /* ─── NAVIGATION ─── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 40px;
+      background: rgba(13, 17, 32, 0.7);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .logo span { color: var(--accent); }
+
+    .nav-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(77, 255, 203, 0.06);
+      border: 1px solid rgba(77, 255, 203, 0.2);
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent2);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .pulse-dot {
+      width: 6px; height: 6px;
+      background: var(--accent2);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent2);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.9); opacity: 0.6; }
+      50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 14px var(--accent2); }
+      100% { transform: scale(0.9); opacity: 0.6; }
+    }
+
+    /* ─── CONTAINER LAYOUT ─── */
+    .dashboard-layout {
+      max-width: 1300px;
+      margin: 40px auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    /* ─── BANNER CARD (UNLOCKED FEEDBACK) ─── */
+    .unlocked-banner {
+      background: linear-gradient(135deg, var(--surface), var(--surface2));
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 4px;
+      padding: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .banner-text h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .banner-text p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* API KEY GENERATOR BOX */
+    .api-generator-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 16px 24px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .key-meta span {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 2px;
+    }
+    .key-value {
+      font-family: monospace;
+      font-size: 1rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .btn-refresh {
+      background: var(--surface3);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      border-radius: 2px;
+      cursor: none;
+      transition: all 0.3s;
+    }
+    .btn-refresh:hover {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
+    /* ─── GRID PANEL DATA UTAMA ─── */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 32px;
+    }
+
+    @media (max-width: 992px) {
+      .main-grid { grid-template-columns: 1fr; }
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 32px;
+    }
+
+    .panel-header {
+      margin-bottom: 24px;
+    }
+    .panel-header h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .panel-header p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* UNLOCKED DATA TABLE */
+    .table-responsive {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+    th {
+      background: var(--surface2);
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      line-height: 1.5;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255,255,255,0.01); }
+
+    /* STATUS RISK BADGES */
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 2px;
+      letter-spacing: 0.02em;
+    }
+    .badge.kritis { background: rgba(255, 77, 109, 0.1); color: var(--danger); }
+    .badge.tinggi { background: rgba(255, 170, 77, 0.1); color: var(--warn); }
+    .badge.sedang { background: rgba(77, 255, 203, 0.1); color: var(--accent2); }
+
+    /* INTEGRATION DOCUMENTATION BOX */
+    .doc-block {
+      margin-bottom: 24px;
+    }
+    .doc-block h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .doc-block p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .code-editor {
+      background: #05070d;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .code-topbar {
+      background: var(--surface2);
+      padding: 10px 16px;
+      font-size: 0.75rem;
+      font-family: monospace;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+    .code-view {
+      padding: 20px;
+      font-family: monospace;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: #a6adbb;
+      overflow-x: auto;
+    }
+
+    /* SYNTAX CODES HIGHLIGHT */
+    .c-comment { color: var(--muted); font-style: italic; }
+    .c-key { color: var(--accent); font-weight: bold; }
+    .c-attr { color: #f28c18; }
+    .c-string { color: var(--accent2); }
+
+    .btn-back-landing {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: var(--accent2);
+      text-decoration: none;
+      cursor: none;
+      transition: opacity 0.3s;
+    }
+    .btn-back-landing:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav>
+    <div class="logo">Up<span>voria</span> Enterprise</div>
+    <div class="nav-badge">
+      <div class="pulse-dot"></div>
+      👑 Full Access Unlocked
+    </div>
+  </nav>
+
+  <div class="dashboard-layout">
+    
+    <div class="unlocked-banner">
+      <div class="banner-text">
+        <h1>Portal Data Pengembang Resmi</h1>
+        <p>Akses repositori Big Data, token API, dan simulasi analisis makro otomatisasi Anda siap digunakan.</p>
+      </div>
+      <div class="api-generator-box">
+        <div class="key-meta">
+          <span>Production API Key</span>
+          <div class="key-value" id="apiKeyText">upv_live_8f3a2cc7401e99d1b</div>
+        </div>
+        <button class="btn-refresh" id="btnRegen">Regenerate Key</button>
+      </div>
+    </div>
+
+    <div class="main-grid">
+      
+      <div class="panel">
+        <div class="panel-header">
+          <h2><span>📊</span> Enterprise Database Sandbox</h2>
+          <p>Seluruh dataset variabel kalkulasi matriks disrupsi AI makro-mikro global yang sudah terbuka penuh.</p>
+        </div>
+        
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Kategori Industri</th>
+                <th>Skor Risiko AI</th>
+                <th>Tingkat Ancaman</th>
+                <th>Sektor Paling Rentan</th>
+                <th>Kebutuhan Kompetensi Utama</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight: 600;">Keuangan & Perbankan</td>
+                <td>68%</td>
+                <td><span class="badge tinggi">Tinggi</span></td>
+                <td>Credit Scoring, Akuntansi Dasar, Administrasi Berkas</td>
+                <td>Python, Analisis Data Prediktif, Audit Kepatuhan AI</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">Manufaktur & Logistik</td>
+                <td>82%</td>
+                <td><span class="badge kritis">Kritis</span></td>
+                <td>Operator Perakitan, Data Entri Inventori, Sortir Logistik</td>
+                <td>Otomasi PLC, Integrasi Robotika IoT, Sistem SCADA</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">Kreatif & Media Pembuat Konten</td>
+                <td>55%</td>
+                <td><span class="badge sedang">Sedang</span></td>
+                <td>Copywriting Dasar, Translasi Manual, Video Cutting</td>
+                <td>Art Direction, Manajemen Strategi AI, Prompt Tuning</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">Teknologi Informasi (TI)</td>
+                <td>42%</td>
+                <td><span class="badge sedang">Sedang</span></td>
+                <td>Junior QA Testing, Dokumentasi Kode, Scripting Dasar</td>
+                <td>System Architecture, Deep Learning, MLOps Specialist</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">Layanan Kesehatan & Farmasi</td>
+                <td>30%</td>
+                <td><span class="badge sedang">Sedang</span></td>
+                <td>Transkripsi Medis, Administrasi Jadwal Klinik</td>
+                <td>Analisis Bioinformatika, Operator Hardware Diagnostik</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <h2><span>🔌</span> Dokumentasi Integrasi</h2>
+          <p>Panduan teknis bagi tim pengembang software mitra untuk menghubungkan endpoint Upvoria ke core aplikasi internal.</p>
+        </div>
+
+        <div class="doc-block">
+          <h3>Production Base URL</h3>
+          <p>Gunakan endpoint URL resmi ini untuk melakukan pemanggilan data server:</p>
+          <div class="code-editor">
+            <div class="code-topbar">Base URL Connection</div>
+            <div class="code-view">https://api.upvoria.com/v1/predict</div>
+          </div>
+        </div>
+
+        <div class="doc-block">
+          <h3>Contoh Fetch Data Request (JavaScript)</h3>
+          <p>Contoh skrip penarikan data dinamis berformat JSON dengan menyertakan autentikasi API Key:</p>
+          <div class="code-editor">
+            <div class="code-topbar">app.js</div>
+            <div class="code-view"><span class="c-key">fetch</span>(<span class="c-string">'https://api.upvoria.com/v1/predict?industry=finance'</span>, {
+  <span class="c-attr">method</span>: <span class="c-string">'GET'</span>,
+  <span class="c-attr">headers</span>: {
+    <span class="c-string">'X-API-KEY'</span>: <span class="c-string">'KUNCI_API_ANDA'</span>
+  }
+})
+.<span class="c-key">then</span>(res => res.json())
+.<span class="c-key">then</span>(data => console.log(data));</div>
+          </div>
+        </div>
+
+        <div style="text-align: center;">
+          <a href="index.html" class="btn-back-landing">← Kembali ke Landing Page</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // 1. LOGIKA ANIMASI SEGAR CUSTOM CURSOR UPVORIA
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => { 
+      mx = e.clientX; 
+      my = e.clientY; 
+    });
+
+    function animateCursor() {
+      cursor.style.left = mx + 'px'; 
+      cursor.style.top = my + 'px';
+      rx += (mx - rx) * 0.12; 
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px'; 
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Efek Hover pada elemen interaktif agar kursor bulatnya merespon membesar
+    function refreshDashboardCursor() {
+      document.querySelectorAll('button, a, .btn-refresh').forEach(el => {
+        el.addEventListener('mouseenter', () => { 
+          cursor.style.transform = 'translate(-50%,-50%) scale(2.5)'; 
+          ring.style.opacity = '0'; 
+        });
+        el.addEventListener('mouseleave', () => { 
+          cursor.style.transform = 'translate(-50%,-50%) scale(1)'; 
+          ring.style.opacity = '0.5'; 
+        });
+      });
+    }
+    refreshDashboardCursor();
+
+    // 2. LOGIKA GENERATOR SIMULASI TOKEN API KEY
+    document.getElementById('btnRegen').addEventListener('click', () => {
+      const chars = '0123456789abcdef';
+      let randomHex = '';
+      for (let i = 0; i < 16; i++) {
+        randomHex += chars[Math.floor(Math.random() * 16)];
+      }
+      document.getElementById('apiKeyText').innerText = 'upv_live_' + randomHex;
+      alert('Kunci Produksi API Baru Berhasil Di-Regenerate!');
+    });
+  </script>
+</body>
+</html>
