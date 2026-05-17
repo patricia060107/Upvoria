@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upvoria — Kebangkitan Menuju Nilai & Produktivitas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- CURSOR -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">Up<span>voria</span></div>
+    <ul class="nav-links">
+      <li><a href="#predictor">Prediktor</a></li>
+      <li><a href="#upskilling">Upskilling</a></li>
+      <li><a href="#industries">Industri</a></li>
+      <li><a href="#cara-kerja">Metodologi</a></li>
+    </ul>
+    <button class="nav-cta" onclick="document.getElementById('predictor').scrollIntoView({behavior:'smooth'})">Mulai Analisis</button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-orb orb1"></div>
+    <div class="hero-orb orb2"></div>
+
+    <div class="hero-tag">AI Disruption Predictor · 2025</div>
+    <h1 class="hero-title">
+      <span class="outline">Industri mana</span>
+      <span class="accent">yang akan</span>
+      <span>digantikan AI?</span>
+    </h1>
+    <p class="hero-sub">Upvoria membantu kamu memahami risiko disrupsi AI di berbagai industri — dan yang lebih penting, bagaimana <strong>bangkit &amp; beradaptasi</strong> menghadapinya.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('predictor').scrollIntoView({behavior:'smooth'})">
+        <span>Cek Industri Kamu →</span>
+      </button>
+      <button class="btn-ghost" onclick="document.getElementById('industries').scrollIntoView({behavior:'smooth'})">Lihat Semua Industri</button>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num" id="counter1">0</div>
+        <div class="stat-label">Industri Dianalisis</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="counter2">0%</div>
+        <div class="stat-label">Pekerjaan Berisiko</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="counter3">0</div>
+        <div class="stat-label">Jalur Upskilling</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-track" id="tickerTrack">
+      <span class="ticker-item">Manufaktur</span>
+      <span class="ticker-item">Keuangan & Perbankan</span>
+      <span class="ticker-item">Transportasi</span>
+      <span class="ticker-item">Ritel</span>
+      <span class="ticker-item">Layanan Kesehatan</span>
+      <span class="ticker-item">Hukum</span>
+      <span class="ticker-item">Pendidikan</span>
+      <span class="ticker-item">Media & Jurnalisme</span>
+      <span class="ticker-item">Akunting</span>
+      <span class="ticker-item">Customer Service</span>
+      <span class="ticker-item">Pertanian</span>
+      <span class="ticker-item">Konstruksi</span>
+      <span class="ticker-item">Manufaktur</span>
+      <span class="ticker-item">Keuangan & Perbankan</span>
+      <span class="ticker-item">Transportasi</span>
+      <span class="ticker-item">Ritel</span>
+      <span class="ticker-item">Layanan Kesehatan</span>
+      <span class="ticker-item">Hukum</span>
+      <span class="ticker-item">Pendidikan</span>
+      <span class="ticker-item">Media & Jurnalisme</span>
+      <span class="ticker-item">Akunting</span>
+      <span class="ticker-item">Customer Service</span>
+      <span class="ticker-item">Pertanian</span>
+      <span class="ticker-item">Konstruksi</span>
+    </div>
+  </div>
+
+  <!-- PREDICTOR -->
+  <section id="predictor">
+    <p class="section-label reveal">Alat Prediksi</p>
+    <h2 class="section-title reveal">Analisis Risiko<br>Industri Kamu</h2>
+    <p class="reveal" style="color:var(--muted);max-width:500px;font-size:0.95rem;line-height:1.7;">Masukkan informasi pekerjaanmu untuk mendapatkan analisis mendalam tentang tingkat risiko disrupsi AI dan rekomendasi adaptasi yang dipersonalisasi.</p>
+
+    <div class="predictor-layout">
+      <div class="predictor-form-wrap reveal">
+        <div class="input-group">
+          <label>Sektor Industri</label>
+          <div class="select-arrow">
+            <select id="industrySelect">
+              <option value="">— Pilih Industri —</option>
+              <option value="manufaktur">Manufaktur & Produksi</option>
+              <option value="keuangan">Keuangan & Perbankan</option>
+              <option value="transportasi">Transportasi & Logistik</option>
+              <option value="ritel">Ritel & E-Commerce</option>
+              <option value="kesehatan">Layanan Kesehatan</option>
+              <option value="hukum">Hukum & Kepatuhan</option>
+              <option value="pendidikan">Pendidikan & Pelatihan</option>
+              <option value="media">Media & Jurnalisme</option>
+              <option value="akunting">Akunting & Pajak</option>
+              <option value="customer_service">Customer Service</option>
+              <option value="pertanian">Pertanian & Agrikultur</option>
+              <option value="konstruksi">Konstruksi & Arsitektur</option>
+            </select>
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Jenis Pekerjaan / Peran Kamu</label>
+          <input type="text" id="jobInput" placeholder="Contoh: Akuntan, Driver, Programmer..." />
+        </div>
+        <div class="input-group">
+          <label>Level Pengalaman</label>
+          <div class="select-arrow">
+            <select id="expSelect">
+              <option value="menengah">Menengah (3–7 Tahun)</option>
+              <option value="pemula">Pemula (0–2 Tahun)</option>
+              <option value="senior">Senior (8+ Tahun)</option>
+            </select>
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Literasi Teknologi</label>
+          <div class="select-arrow">
+            <select id="techSelect">
+              <option value="sedang">Sedang</option>
+              <option value="tinggi">Tinggi — Aktif pakai AI tools</option>
+              <option value="rendah">Rendah — Belum familiar</option>
+            </select>
+          </div>
+        </div>
+        <button class="predict-btn" onclick="runPrediction()">⚡ Analisis Sekarang</button>
+      </div>
+
+      <!-- RESULT PANEL -->
+      <div class="result-panel reveal reveal-delay-1">
+        <div class="loading-overlay" id="loadingOverlay" style="display:none;">
+          <div class="loading-spinner"></div>
+        </div>
+        <div class="result-empty" id="resultEmpty">
+          <div class="result-empty-icon">🔍</div>
+          <p>Pilih industri dan isi data kamu<br>untuk melihat analisis risiko AI.</p>
+        </div>
+        <div class="result-content" id="resultContent">
+          <div class="risk-header">
+            <div class="risk-industry" id="rIndustry"></div>
+            <span class="risk-badge" id="rBadge"></span>
+          </div>
+          <div class="risk-meter">
+            <div class="risk-meter-label">
+              <span>Risiko Tergantikan AI</span>
+              <strong id="rPct"></strong>
+            </div>
+            <div class="meter-track">
+              <div class="meter-fill" id="rMeter"></div>
+            </div>
+          </div>
+          <div class="risk-insights">
+            <div class="insight-card">
+              <div class="insight-card-label">Horizon Waktu</div>
+              <div class="insight-card-val" id="rHorizon"></div>
+            </div>
+            <div class="insight-card">
+              <div class="insight-card-label">Dampak</div>
+              <div class="insight-card-val" id="rImpact"></div>
+            </div>
+            <div class="insight-card">
+              <div class="insight-card-label">Urgensi</div>
+              <div class="insight-card-val" id="rUrgency"></div>
+            </div>
+            <div class="insight-card">
+              <div class="insight-card-label">Kemampuan Adaptasi</div>
+              <div class="insight-card-val" id="rAdapt"></div>
+            </div>
+          </div>
+          <p class="risk-desc" id="rDesc"></p>
+          <div class="actions-header">
+            <span>Langkah Adaptasi Prioritas</span>
+            <button class="upskilling-btn" id="goUpskillingBtn" onclick="scrollToUpskilling()">
+              Lihat Roadmap Upskilling Lengkap →
+            </button>
+          </div>
+          <ul class="risk-actions-list" id="rActions"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UPSKILLING SECTION -->
+  <section id="upskilling">
+    <p class="section-label reveal">Jalur Pengembangan Diri</p>
+    <h2 class="section-title reveal">Roadmap Upskilling<br><span style="color:var(--accent)">Per Industri</span></h2>
+    <p class="reveal" style="color:var(--muted);max-width:560px;font-size:0.95rem;line-height:1.7;margin-bottom:0;">
+      Pilih industrimu untuk mendapatkan roadmap upskilling yang terstruktur — mulai dari skill prioritas, sumber belajar gratis, hingga target sertifikasi yang diakui industri.
+    </p>
+
+    <!-- Industry Pills -->
+    <div class="upskilling-pills reveal" id="upskillingPills"></div>
+
+    <!-- Upskilling Content -->
+    <div class="upskilling-empty" id="upskillingEmpty">
+      <div class="upskilling-empty-icon">🚀</div>
+      <p>Pilih industri di atas untuk melihat<br>roadmap upskilling yang lengkap.</p>
+    </div>
+
+    <div class="upskilling-content" id="upskillingContent" style="display:none;">
+      <!-- Header -->
+      <div class="upskilling-header reveal">
+        <div class="upskilling-title-wrap">
+          <span class="upskilling-icon-big" id="uIcon"></span>
+          <div>
+            <h3 class="upskilling-industry-name" id="uName"></h3>
+            <p class="upskilling-subtitle" id="uSubtitle"></p>
+          </div>
+        </div>
+        <div class="upskilling-risk-pill" id="uRiskPill"></div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="upskilling-tabs">
+        <button class="utab active" data-tab="roadmap" onclick="switchTab('roadmap', this)">📍 Roadmap Skill</button>
+        <button class="utab" data-tab="resources" onclick="switchTab('resources', this)">📚 Sumber Belajar</button>
+        <button class="utab" data-tab="careers" onclick="switchTab('careers', this)">💼 Karier Masa Depan</button>
+        <button class="utab" data-tab="tools" onclick="switchTab('tools', this)">🛠️ Tools AI Relevan</button>
+      </div>
+
+      <!-- Tab: Roadmap -->
+      <div class="utab-panel active" id="panel-roadmap">
+        <div class="roadmap-timeline" id="roadmapTimeline"></div>
+      </div>
+
+      <!-- Tab: Resources -->
+      <div class="utab-panel" id="panel-resources">
+        <div class="resources-grid" id="resourcesGrid"></div>
+      </div>
+
+      <!-- Tab: Careers -->
+      <div class="utab-panel" id="panel-careers">
+        <div class="careers-grid" id="careersGrid"></div>
+      </div>
+
+      <!-- Tab: Tools -->
+      <div class="utab-panel" id="panel-tools">
+        <div class="tools-grid" id="toolsGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES GRID -->
+  <section id="industries">
+    <p class="section-label reveal">Gambaran Menyeluruh</p>
+    <h2 class="section-title reveal">Lanskap Risiko<br>Seluruh Industri</h2>
+    <p class="reveal" style="color:var(--muted);max-width:500px;font-size:0.95rem;line-height:1.7;margin-bottom:0;">Gambaran menyeluruh tingkat ancaman AI terhadap berbagai sektor — berdasarkan riset McKinsey, World Economic Forum, dan Oxford.</p>
+
+    <div class="industries-grid" id="industriesGrid"></div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="cara-kerja">
+    <p class="section-label reveal">Metodologi</p>
+    <h2 class="section-title reveal">Bagaimana Upvoria<br>Bekerja?</h2>
+
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-num">01</div>
+        <span class="step-icon">📊</span>
+        <div class="step-title">Analisis Data Industri</div>
+        <div class="step-desc">Kami mengkompilasi data dari riset global WEF, McKinsey, dan Oxford tentang otomatisasi dan disrupsi AI per sektor.</div>
+      </div>
+      <div class="step-card reveal reveal-delay-1">
+        <div class="step-num">02</div>
+        <span class="step-icon">🤖</span>
+        <div class="step-title">Model Prediksi AI</div>
+        <div class="step-desc">Algoritma kami mengukur tingkat repetisi tugas, ketergantungan pada data, dan kemampuan otomatisasi per pekerjaan.</div>
+      </div>
+      <div class="step-card reveal reveal-delay-2">
+        <div class="step-num">03</div>
+        <span class="step-icon">🎯</span>
+        <div class="step-title">Skor Risiko Personal</div>
+        <div class="step-desc">Mempertimbangkan pengalaman, skill teknologi, dan jenis pekerjaan untuk menghasilkan skor risiko yang dipersonalisasi.</div>
+      </div>
+      <div class="step-card reveal reveal-delay-3">
+        <div class="step-num">04</div>
+        <span class="step-icon">🚀</span>
+        <div class="step-title">Roadmap Upskilling</div>
+        <div class="step-desc">Upvoria tidak hanya memberi peringatan — tapi juga jalur konkret dengan resources, karier, dan tools untuk berkembang di era AI.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta">
+    <p class="section-label reveal">Bergabung Sekarang</p>
+    <h2 class="cta-title reveal">Jangan Tunggu Sampai<br><em>Digantikan.</em></h2>
+    <p class="cta-sub reveal">Upvoria hadir untuk membantu kamu beradaptasi, berkembang, dan memenangkan era baru — bukan melawannya.</p>
+    <div class="reveal" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn-primary" onclick="document.getElementById('predictor').scrollIntoView({behavior:'smooth'})">
+        <span>Mulai Analisis Gratis →</span>
+      </button>
+      <button class="btn-ghost" onclick="document.getElementById('upskilling').scrollIntoView({behavior:'smooth'})">Lihat Roadmap Upskilling</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Upvoria</div>
+    <div class="footer-copy">© 2025 Upvoria · Prototype Design Thinking</div>
+    <div class="footer-tagline">Kebangkitan Menuju Nilai & Produktivitas ✦</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
