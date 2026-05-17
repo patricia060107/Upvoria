@@ -1185,3 +1185,36 @@ document.getElementById('jobInput').addEventListener('keydown', e => {
 
 // Init cursor targets
 refreshCursorTargets();
+
+// ─── LOGIKA POP-UP MODAL SIGN UP B2B ──────────────────────────
+const signupModal = document.getElementById('signupModal');
+const openSignupBtn = document.getElementById('openSignupBtn');
+const closeSignupBtn = document.getElementById('closeSignupBtn');
+
+// Aksi buka modal saat tombol diklik
+if (openSignupBtn && signupModal) {
+  openSignupBtn.addEventListener('click', () => {
+    signupModal.classList.add('active');
+  });
+}
+
+// Aksi tutup modal lewat tombol silang (X)
+if (closeSignupBtn && signupModal) {
+  closeSignupBtn.addEventListener('click', () => {
+    signupModal.classList.remove('active');
+  });
+}
+
+// Aksi tutup modal otomatis jika user klik di area luar kotak form
+if (signupModal) {
+  signupModal.addEventListener('click', (e) => {
+    if (e.target === signupModal) {
+      signupModal.classList.remove('active');
+    }
+  });
+}
+
+// Daftarkan ulang elemen input baru agar merespon custom cursor lingkaran bawaan Upvoria
+if (typeof refreshCursorTargets === 'function') {
+  refreshCursorTargets();
+}
